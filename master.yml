@@ -1,0 +1,29 @@
+name: docker build
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+ docker:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        docker: [20.10.21]
+
+    steps:
+    
+    - name: install docker
+      run: 
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sh get-docker.sh
+        
+    - name: build the docker image
+      run: |
+         docker build -t myapp .
+         
+    - name: build the container 
+      run: |
+          docker run --name yout -p 80:80 -d -it myapp2 
+       

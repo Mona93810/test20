@@ -1,0 +1,219 @@
+{% extends 'faculity_nav.html' %}
+
+{% block title %} View Assignment 
+{% endblock title %}
+{% block body %}
+
+
+<body>
+<div id="main">
+	<div class="container py-5 my-5 ml-auto">	
+			
+    <div class="card border-1">
+  
+              	
+                <h2 class="pl-2"><b><span class="fa fa-eye"> </span> View Assignment</b></h2>
+            {% if suc %}
+              <div class="alert alert-success card m-2">
+  <strong><span class="fa fa-check-square"> </span> Success!</strong> Student Update Sucessfull
+</div>
+            {% else %}
+            {% endif %}
+           <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data" id="form">
+                {% csrf_token %}
+
+                <div class=" col-md-6" id="msgbox" style="display: none;">
+                 <div class="alert alert-danger" role="alert">
+Password Not Match
+</div>
+        </div>
+
+
+
+
+        <br>
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <div class="form-group row">
+                   
+				   <div class="col col-md-6">
+				   <label><b><span class="fa fa-user"></span> Submission ID :</b></label>
+
+                    <input type="text" class="form-control" name="assignment_submittion_id" 
+                        value="{{assignmentData.assignment_submittion_id}}" disabled required />
+						</div>
+						<div class="col col-md-6">
+				   <label><b><span class="fa fa-sort-amount-down"></span>  Student Roll Number :</b></label>
+
+                    <input type="text" class="form-control" name="stdnt_Roll" value="{{studentData.stdnt_Roll}}" required readonly />
+						</div>
+
+                </div>
+<div class="form-group">
+                    <label><b><span class="fa fa-calendar-day
+"></span> Submission Date & Time :</b></label>
+
+                    <input type="text" class="form-control" name="stdnt_sbumit_dt" value="{{assignmentData.assignment_submittion_date}}"
+                        required readonly />
+                </div>
+                <div class="form-group">
+				
+                    <label><b><span class="fa fa-file-alt"></span> Submitted File :</b></label>
+                    <br>
+<a clas="form-control" href="{{assignmentData.assignment_submitted_File}}" download>
+{{assignmentData.assignment_submitted_File}}
+<br>
+<button class="btn btn-primary" >Download </button></a>
+
+                </div>
+                
+				
+                <div class="form-group">
+                    <label><b><span class="fa fa-share-square
+"></span> Set  Status :</b></label>
+                    <select class="form-control" name="status_frm">
+
+                    <option value="Opened"
+                    
+                    {% ifequal assignmentData.assignment_submittion_status "Opened"  %}
+                            
+                            selected
+                            
+                            {% endifequal %}
+                    
+                    >Opened </option>
+                    <option value="Not Opened"  
+                    
+                    {% ifequal assignmentData.assignment_submittion_status "Not Opened"  %}
+                            
+                            selected
+                            
+                            {% endifequal %}
+                            >Not Opened </option>
+                    <option value="Re Upload File"
+                    
+                     {% ifequal assignmentData.assignment_submittion_status "Re Upload File"  %}
+                            
+                            selected
+                            
+                            {% endifequal %}
+                    
+                    > Re Upload File</option>
+
+                    </select>
+                </div>
+               
+				
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+				  <label><b><span class="fa fa-file-signature"></span> Full Name :</b></label> <br>
+
+                    <input type="text" class="form-control" name="stdnt_NM" placeholder="Full Name" value="{{studentData.stdnt_Name}}"
+                        required readonly/>
+
+                   
+                </div>
+				<div class="form-group">
+				  <label><b><span class="fa fa-code-branch"></span> Review :</b></label> <br>
+
+                   <textarea class="form-control" rows="6" name="review_frm">{{assignmentData.assignment_submittion_review}} </textarea>
+                   
+                </div>
+				<div class="form-group">
+                    <label><b><span class="fa fa-calendar-day"></span> Marks :</b></label>
+
+                    <input type="text" name="stdnt_assignMarks" class="form-control"
+                    value="{{assignmentData.assignment_submited_Marks}}" required autofocus/>
+                </div>
+                
+               
+
+
+            </div>
+        </div>
+    </div>
+	 <div class="form-group">
+<input type="hidden" name="id" value={{assignmentData.assignment_submittion_id}} />
+                   
+<input class="btn btn-success ml-3" type="submit" value="Save" id="submit_btn">
+    <br>
+                </div>
+
+
+
+    </form>
+    </div>
+    </div>
+
+
+</div>
+</div>
+</body>
+<script>
+openNav();
+
+
+
+if($('#stdnt_Branch').val()=='none')
+{
+                $('#submit_btn').attr('disabled','disabled');
+
+}
+function selectCheck() {
+var selectval = $('#stdnt_Branch'); 
+
+ if (selectval.val()=='none') {
+
+           
+            $('#submit_btn').attr('disabled','disabled');
+			alert('Select Branch');
+
+
+
+        } else 
+           
+            $('#submit_btn').attr('disabled',false);
+
+
+        
+
+}
+
+function checkpwd(cnf_pwd) {
+        var pwdID = $('#pwd').val()
+
+        var msg = $('#msgbox');
+        var btn_submit = ('#submit_btn');
+
+        if (pwdID != cnf_pwd) {
+
+            console.log('not matched');
+            msg.css('display', 'block');
+            // $("#form").submit(function (e) {
+            //     alert('Check Passwords');
+            //     e.preventDefault(e);
+            // });
+            $('#submit_btn').attr('disabled','disabled');
+
+
+
+        } else if (pwdID == cnf_pwd) {
+            console.log('matched');
+            msg.css('display', 'none');
+            $('#submit_btn').attr('disabled',false);
+			
+				if($('#stdnt_Branch').val()=='none')
+				{
+								$('#submit_btn').attr('disabled','disabled');
+
+				}
+
+
+        }
+}
+
+</script>
+{% endblock %}
+</html>
