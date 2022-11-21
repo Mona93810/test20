@@ -2,4 +2,3 @@ django
 flask
 numpy
 sklearn
-pickle
