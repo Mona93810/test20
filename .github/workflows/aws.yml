@@ -64,7 +64,7 @@ jobs:
       id: _640597608538 
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: 640597608538.dkr.ecr.us-east-1.amazonaws.com/myapp2
       id: _3a92de375ac5
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
