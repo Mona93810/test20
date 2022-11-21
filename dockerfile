@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED=1
 
 COPY requirements.txt .
 RUN apt-get update -y && apt-get install -y python3-pip
-RUN python -m pip install -r requirements.txt
+RUN python3 -m pip install -r requirements.txt
 
 WORKDIR /app
 COPY . /app
