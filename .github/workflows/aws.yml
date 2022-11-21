@@ -61,7 +61,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: atom
-      id: atom@640597608538 
+      id: _640597608538 
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
