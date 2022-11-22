@@ -82,7 +82,7 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: ./portal/myapp-taskdef.json
-        container-name: h1
+        container-name: myapp-container
         image: 640597608538.dkr.ecr.us-east-1.amazonaws.com/myapp2
 
     - name: Deploy Amazon ECS task definition
