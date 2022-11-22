@@ -88,7 +88,7 @@ jobs:
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: ./test20/portal/myapp-taskdef.json
+        task-definition: ./portal/myapp-taskdef.json
         service: myapp-service
         cluster: Atom-state
         wait-for-service-stability: true
