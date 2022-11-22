@@ -81,7 +81,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ./test20/portal/myapp-taskdef.json
+        task-definition: ./portal/myapp-taskdef.json
         container-name: h1
         image: 640597608538.dkr.ecr.us-east-1.amazonaws.com/myapp2
 
