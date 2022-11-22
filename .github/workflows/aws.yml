@@ -91,4 +91,4 @@ jobs:
         task-definition: ./portal/myapp-taskdef.json
         service: myapp-service
         cluster: Atom-state
-        wait-for-service-stability: true
+        wait-for-service-stability: true 
