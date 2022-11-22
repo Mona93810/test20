@@ -2,3 +2,4 @@ django
 flask
 numpy
 sklearn
+gunicorn
