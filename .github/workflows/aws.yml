@@ -73,7 +73,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t firstrepo .
+        docker build -t 640597608538.dkr.ecr.us-east-1.amazonaws.com/firstrepo .
         docker push 640597608538.dkr.ecr.us-east-1.amazonaws.com/firstrepo:latest
         
 
@@ -83,7 +83,7 @@ jobs:
       with:
         task-definition: ./portal/myapp-taskdef.json
         container-name: ubuntu-con
-        image: firstrepo
+        image: 640597608538.dkr.ecr.us-east-1.amazonaws.com/firstrepo
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
