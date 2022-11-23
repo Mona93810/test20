@@ -37,7 +37,7 @@ env:
   ECS_CLUSTER: Atom-state                      # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: myapp-taskdef.json          # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: h1           # set this to the name of the container in the
+  CONTAINER_NAME: ubuntu-con           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 permissions:
@@ -56,16 +56,16 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-access-key-id: AKIAZKJUXZBNJBADFDHQ
+        aws-secret-access-key: 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
+        aws-region: us-east-1
 
     - name: atom
       id: _640597608538 
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: 640597608538.dkr.ecr.us-east-1.amazonaws.com/myapp2
-      id: _3a92de375ac5
+      id: _b12ad00c97cf
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: latest
@@ -73,8 +73,8 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t 640597608538.dkr.ecr.us-east-1.amazonaws.com/myapp2 .
-        docker push 640597608538.dkr.ecr.us-east-1.amazonaws.com/myapp2:latest
+        docker build -t firstrepo .
+        docker push 640597608538.dkr.ecr.us-east-1.amazonaws.com/firstrepo:latest
         
 
     - name: Fill in the new image ID in the Amazon ECS task definition
@@ -82,8 +82,8 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: ./portal/myapp-taskdef.json
-        container-name: myapp-container
-        image: 640597608538.dkr.ecr.us-east-1.amazonaws.com/myapp2
+        container-name: ubuntu-con
+        image: firstrepo
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
